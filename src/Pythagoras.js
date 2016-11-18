@@ -2,36 +2,43 @@
 import React from 'react';
 import { interpolateViridis } from 'd3-scale';
 
-const MaxLVL = 10,
-      Factor = .5*Math.sqrt(2);
+const Factor = .5*Math.sqrt(2);
 
-const Pythagoras = ({ ang, w, x, y, lvl, left, right }) => {
-    if (lvl > MaxLVL) {
+Math.deg = function(radians) {
+  return radians * (180 / Math.PI);
+};
+
+const Pythagoras = ({ maxlvl, w, x, y, lvl, left, right }) => {
+    if (lvl > maxlvl || w < 1) {
         return null;
     }
 
-    const nextSide = w*Factor;
+    const nextLeft = Factor*w,
+          nextRight = Factor*w,
+          d = nextLeft + nextRight + w,
+          A = 45,
+          B = 45;
 
     let rotate = '';
 
     if (left) {
-        rotate = `rotate(${-ang} 0 ${w})`;
+        rotate = `rotate(${-A} 0 ${w})`;
     }else if (right) {
-        rotate = `rotate(${ang} ${w} ${w})`;
+        rotate = `rotate(${B} ${w} ${w})`;
     }
 
     return (
         <g transform={`translate(${x} ${y}) ${rotate}`}>
             <rect width={w} height={w}
                   x={0} y={0}
-                  style={{fill: interpolateViridis(lvl/MaxLVL)}} />
+                  style={{fill: interpolateViridis(lvl/maxlvl)}} />
 
-            <Pythagoras ang={ang} w={nextSide}
-                        x={w-nextSide} y={-nextSide} lvl={lvl+1}
+            <Pythagoras w={nextLeft}
+                        x={w-nextLeft} y={-nextLeft} lvl={lvl+1} maxlvl={maxlvl}
                         right />
 
-            <Pythagoras ang={ang} w={nextSide}
-                        x={0} y={-nextSide} lvl={lvl+1}
+            <Pythagoras w={nextRight}
+                        x={0} y={-nextRight} lvl={lvl+1} maxlvl={maxlvl}
                         left />
         </g>
     );

@@ -5,6 +5,25 @@ import './App.css';
 import Pythagoras from './Pythagoras';
 
 class App extends Component {
+    state = {
+        currentMax: 0,
+    };
+
+    realMax = 13;
+
+    componentDidMount() {
+        this.next();
+    }
+
+    next() {
+        const { currentMax } = this.state;
+
+        if (currentMax < this.realMax) {
+            this.setState({currentMax: currentMax + 1});
+            setTimeout(this.next.bind(this), 500);
+        }
+    }
+
     render() {
         return (
             <div className="App">
@@ -15,11 +34,11 @@ class App extends Component {
                 <p className="App-intro">
                     <svg width="640" height="480">
 
-                        <Pythagoras ang={45}
-                                    w={100}
+                        <Pythagoras w={100}
                                     x={320-50}
                                     y={480-100}
-                                    lvl={0} />
+                                    lvl={0}
+                                    maxlvl={this.state.currentMax}/>
 
                     </svg>
                 </p>
