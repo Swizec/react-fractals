@@ -3,3 +3,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # React Fractals
 
 An experiment in fractalization and component recursion.
+
+![](/growing-pythagoras-tree.gif)
