@@ -34,7 +34,8 @@ class App extends Component {
                 <p className="App-intro">
                     <svg width="640" height="480">
 
-                        <Pythagoras w={100}
+                        <Pythagoras w={80}
+                                    h={20}
                                     x={320-50}
                                     y={480-100}
                                     lvl={0}
