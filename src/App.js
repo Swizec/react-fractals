@@ -18,7 +18,7 @@ class App extends Component {
         lean: 0
     };
 
-    realMax = 10;
+    realMax = 12;
 
     componentDidMount() {
         d3select(this.refs.svg).on("mousemove", this.onMouseMove.bind(this));
@@ -45,8 +45,6 @@ class App extends Component {
 
               scaleLean = scaleLinear().domain([0, this.svg.width/2, this.svg.width])
                                        .range([.5, 0, -.5]);
-
-        console.log(scaleLean(x));
 
         this.setState({
             baseHeight: scaleY(y),
