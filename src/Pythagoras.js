@@ -6,17 +6,17 @@ Math.deg = function(radians) {
   return radians * (180 / Math.PI);
 };
 
-const Pythagoras = ({ maxlvl, w, h, x, y, lvl, left, right }) => {
-    if (lvl > maxlvl || w < 1) {
+const Pythagoras = ({ w, h, x, y, heightFactor, lean, left, right, lvl, maxlvl }) => {
+    if (lvl >= maxlvl || w < 1 || h < 1) {
         return null;
     }
 
-    const trigH = .3*w,
-          nextRight = Math.sqrt(trigH**2 + (w * .4)**2),
-          nextLeft = Math.sqrt(trigH**2 + (w * .6)**2),
-          nextHeight = .9*h,
-          A = Math.deg(Math.atan(trigH / (.6 * w))),
-          B = Math.deg(Math.atan(trigH / (.4 * w)));
+    const trigH = heightFactor*w,
+          nextRight = Math.sqrt(trigH**2 + (w * (.5+lean))**2),
+          nextLeft = Math.sqrt(trigH**2 + (w * (.5-lean))**2),
+          nextHeight = .8*h,
+          A = Math.deg(Math.atan(trigH / ((.5-lean) * w))),
+          B = Math.deg(Math.atan(trigH / ((.5+lean) * w)));
 
     let rotate = '';
 
@@ -33,11 +33,17 @@ const Pythagoras = ({ maxlvl, w, h, x, y, lvl, left, right }) => {
                   style={{fill: interpolateViridis(lvl/maxlvl)}} />
 
              <Pythagoras w={nextLeft} h={nextHeight}
-                         x={0} y={-nextHeight} lvl={lvl+1} maxlvl={maxlvl}
+                         x={0} y={-nextHeight}
+                         lvl={lvl+1} maxlvl={maxlvl}
+                         heightFactor={heightFactor}
+                         lean={lean}
                          left />
 
             <Pythagoras w={nextRight} h={nextHeight}
-                        x={w-nextRight} y={-nextHeight} lvl={lvl+1} maxlvl={maxlvl}
+                        x={w-nextRight} y={-nextHeight}
+                        lvl={lvl+1} maxlvl={maxlvl}
+                        heightFactor={heightFactor}
+                        lean={lean}
                         right />
 
         </g>
