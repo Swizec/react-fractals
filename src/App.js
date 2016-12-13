@@ -13,12 +13,12 @@ class App extends Component {
     };
     state = {
         currentMax: 0,
-        baseHeight: 2,
+        baseW: 80,
         heightFactor: 0,
         lean: 0
     };
 
-    realMax = 12;
+    realMax = 11;
 
     componentDidMount() {
         d3select(this.refs.svg).on("mousemove", this.onMouseMove.bind(this));
@@ -37,8 +37,6 @@ class App extends Component {
 
     onMouseMove(event) {
         const [x, y] = d3mouse(this.refs.svg),
-              scaleY = scaleLinear().domain([this.svg.height, this.svg.height/2])
-                                    .range([2, 100]),
 
               scaleFactor = scaleLinear().domain([this.svg.height, 0])
                                          .range([0, .8]),
@@ -47,7 +45,6 @@ class App extends Component {
                                        .range([.5, 0, -.5]);
 
         this.setState({
-            baseHeight: scaleY(y),
             heightFactor: scaleFactor(y),
             lean: scaleLean(x)
         });
@@ -63,12 +60,12 @@ class App extends Component {
                 <p className="App-intro">
                     <svg width={this.svg.width} height={this.svg.height} ref="svg">
 
-                        <Pythagoras w={80}
-                                    h={this.state.baseHeight}
+                        <Pythagoras w={this.state.baseW}
+                                    h={this.state.baseW}
                                     heightFactor={this.state.heightFactor}
                                     lean={this.state.lean}
                                     x={this.svg.width/2-40}
-                                    y={this.svg.height-this.state.baseHeight}
+                                    y={this.svg.height-this.state.baseW}
                                     lvl={0}
                                     maxlvl={this.state.currentMax}/>
 
