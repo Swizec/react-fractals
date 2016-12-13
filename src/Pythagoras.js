@@ -2,8 +2,6 @@
 import React from 'react';
 import { interpolateViridis } from 'd3-scale';
 
-const Factor = .5*Math.sqrt(2);
-
 Math.deg = function(radians) {
   return radians * (180 / Math.PI);
 };
@@ -13,11 +11,11 @@ const Pythagoras = ({ maxlvl, w, x, y, lvl, left, right }) => {
         return null;
     }
 
-    const nextLeft = Factor*w,
-          nextRight = Factor*w,
-          d = nextLeft + nextRight + w,
-          A = 45,
-          B = 45;
+    const currentH = .3*w,
+          nextLeft = Math.sqrt(currentH*currentH + (.5*w*.5*w)),
+          nextRight = Math.sqrt(currentH*currentH + (.5*w*.5*w)),
+          A = Math.deg(Math.atan(currentH / (.5*w))),
+          B = Math.deg(Math.atan(currentH / (.5*w)));
 
     let rotate = '';
 
