@@ -77,4 +77,10 @@ const Pythagoras = ({ w,x, y, heightFactor, lean, left, right, lvl, maxlvl }) =>
     );
 };
 
-export default Pythagoras;
+
+// wrap as a classful component for async rendering: (optional)
+export default class {
+	render(props) {
+		return Pythagoras(props);
+	}
+}
