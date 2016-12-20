@@ -6,6 +6,20 @@ import { scaleLinear } from 'd3-scale';
 
 import Pythagoras from './Pythagoras';
 
+
+// borrowed from Vue fork https://github.com/yyx990803/vue-fractal/blob/master/src/App.vue
+function throttleWithRAF (fn) {
+  let running = false
+  return function () {
+    if (running) return
+    running = true
+    window.requestAnimationFrame(() => {
+      fn.apply(this, arguments)
+      running = false
+    })
+  }
+}
+
 class App extends Component {
     svg = {
         width: 1280,
@@ -17,7 +31,7 @@ class App extends Component {
         heightFactor: 0,
         lean: 0
     };
-
+    running = false;
     realMax = 11;
 
     componentDidMount() {
@@ -35,7 +49,13 @@ class App extends Component {
         }
     }
 
+    // Throttling approach borrowed from Vue fork
+    // https://github.com/yyx990803/vue-fractal/blob/master/src/App.vue
+    // rAF makes it slower than just throttling on React update
     onMouseMove(event) {
+        if (this.running) return;
+        this.running = true;
+
         const [x, y] = d3mouse(this.refs.svg),
 
               scaleFactor = scaleLinear().domain([this.svg.height, 0])
@@ -48,6 +68,7 @@ class App extends Component {
             heightFactor: scaleFactor(y),
             lean: scaleLean(x)
         });
+        this.running = false;
     }
 
     render() {
