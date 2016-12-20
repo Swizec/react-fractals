@@ -79,7 +79,8 @@ class App extends Component {
                     <h2>This is a dancing Pythagoras tree</h2>
                 </div>
                 <p className="App-intro">
-                    <svg width={this.svg.width} height={this.svg.height} ref="svg">
+                    <svg width={this.svg.width} height={this.svg.height} ref="svg"
+                         style={{border: "1px solid lightgray"}}>
 
                         <Pythagoras w={this.state.baseW}
                                     h={this.state.baseW}
