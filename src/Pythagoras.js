@@ -1,17 +1,17 @@
 import React from "react";
 import { interpolateViridis } from "d3-scale";
 
-Math.deg = function(radians) {
+Math.deg = function (radians) {
     return radians * (180 / Math.PI);
 };
 
-const memoizedCalc = (function() {
+const memoizedCalc = (function () {
     const memo = {};
 
     const key = ({ w, heightFactor, lean }) =>
         [w, heightFactor, lean].join("-");
 
-    return args => {
+    return (args) => {
         const memoKey = key(args);
 
         if (memo[memoKey]) {
@@ -25,7 +25,7 @@ const memoizedCalc = (function() {
                 nextRight: Math.sqrt(trigH ** 2 + (w * (0.5 - lean)) ** 2),
                 nextLeft: Math.sqrt(trigH ** 2 + (w * (0.5 + lean)) ** 2),
                 A: Math.deg(Math.atan(trigH / ((0.5 + lean) * w))),
-                B: Math.deg(Math.atan(trigH / ((0.5 - lean) * w)))
+                B: Math.deg(Math.atan(trigH / ((0.5 - lean) * w))),
             };
 
             memo[memoKey] = result;
@@ -43,7 +43,7 @@ const Pythagoras = ({
     left,
     right,
     lvl,
-    maxlvl
+    maxlvl,
 }) => {
     if (lvl >= maxlvl || w < 1) {
         return null;
@@ -52,7 +52,7 @@ const Pythagoras = ({
     const { nextRight, nextLeft, A, B } = memoizedCalc({
         w: w,
         heightFactor: heightFactor,
-        lean: lean
+        lean: lean,
     });
 
     let rotate = "";

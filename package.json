@@ -12,7 +12,6 @@
         "react": "^16.3.0-rc.0",
         "react-dom": "^16.3.0-rc.0"
     },
-    "homepage": "https://swizec.github.io/react-fractals",
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
