@@ -1,4 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {
+    useRef,
+    useState,
+    useEffect,
+    unstable_useTransition,
+} from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { select as d3select, mouse as d3mouse } from "d3-selection";
@@ -20,6 +25,9 @@ function App() {
         lean: 0,
     });
     const svgRef = useRef(null);
+    const [startTransition, isPending] = unstable_useTransition({
+        timeoutMs: 300, // 300ms wait if updates get slow
+    });
 
     // grows tree until max recursion level is reached
     function growTree() {
@@ -39,6 +47,12 @@ function App() {
     }
 
     function onMouseMove(event) {
+        // this never seems to happen?
+        if (isPending) {
+            console.log("Bail on mousemove");
+            return;
+        }
+
         const [x, y] = d3mouse(svgRef.current),
             scaleFactor = scaleLinear()
                 .domain([SVG_DIMENSIONS.height, 0])
@@ -47,12 +61,13 @@ function App() {
                 .domain([0, SVG_DIMENSIONS.width / 2, SVG_DIMENSIONS.width])
                 .range([0.5, 0, -0.5]);
 
-        // these are batched?
-        setState((state) => ({
-            ...state,
-            heightFactor: scaleFactor(y),
-            lean: scaleLean(x),
-        }));
+        startTransition(() => {
+            setState((state) => ({
+                ...state,
+                heightFactor: scaleFactor(y),
+                lean: scaleLean(x),
+            }));
+        });
     }
 
     // the old componentDidMount
