@@ -9,13 +9,13 @@ import Pythagoras from "./Pythagoras";
 class App extends Component {
     svg = {
         width: 1280,
-        height: 600
+        height: 600,
     };
     state = {
         currentMax: 0,
         baseW: 80,
         heightFactor: 0,
-        lean: 0
+        lean: 0,
     };
     running = false;
     realMax = 11;
@@ -52,7 +52,7 @@ class App extends Component {
 
         this.setState({
             heightFactor: scaleFactor(y),
-            lean: scaleLean(x)
+            lean: scaleLean(x),
         });
         this.running = false;
     }
