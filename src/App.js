@@ -11,8 +11,9 @@ function App() {
     };
     const baseWidth = 80;
     const heightFactor = 0.4;
+    const maxTreeSize = 15;
 
-    const [treeSize, setTreeSize] = useState(6);
+    const [treeSize, setTreeSize] = useState(8);
     const [treeLean, setTreeLean] = useState(0);
     const [enableStartTransition, setEnableStartTransition] = useState(false);
 
@@ -92,7 +93,7 @@ function App() {
                         value={treeSize}
                         onChange={changeTreeSize}
                         min="0"
-                        max="11"
+                        max={maxTreeSize}
                         step="1"
                         style={{
                             transform: `rotate(-90deg) translate(-${
