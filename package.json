@@ -7,6 +7,7 @@
     "react-scripts": "^4.0.3"
   },
   "dependencies": {
+    "@gaearon/lag-radar": "^0.1.0",
     "d3-scale": "^1.0.4",
     "d3-selection": "^1.0.3",
     "react": "18.0.0-alpha-9212d994b",

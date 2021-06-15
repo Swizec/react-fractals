@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import lagRadar from "@gaearon/lag-radar";
 import logo from "./logo.svg";
 import "./App.css";
 
 import Pythagoras from "./Pythagoras";
 
 function App() {
+    const radarRef = useRadar();
     const svg = {
         width: 1280,
         height: 600,
@@ -58,7 +60,7 @@ function App() {
     return (
         <div className="App">
             <div className="App-header" style={{ marginBottom: "1rem" }}>
-                <img src={logo} className="App-logo" alt="logo" />
+                <div ref={radarRef} />
                 <h2>This is a leaning Pythagoras tree</h2>
             </div>
 
@@ -135,6 +137,17 @@ function App() {
             </div>
         </div>
     );
+}
+
+function useRadar(id) {
+    return function(node) {
+        if (node && node.childNodes.length === 0) {
+            lagRadar({
+                size: 100,
+                parent: node,
+            });
+        }
+    }
 }
 
 export default App;
