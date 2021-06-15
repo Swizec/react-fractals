@@ -9,8 +9,8 @@
     "dependencies": {
         "d3-scale": "^1.0.4",
         "d3-selection": "^1.0.3",
-        "react": "^18.0.0-alpha-dbe3363cc",
-        "react-dom": "^18.0.0-alpha-dbe3363cc"
+        "react": "18.0.0-alpha-9212d994b",
+        "react-dom": "18.0.0-alpha-9212d994b"
     },
     "scripts": {
         "start": "react-scripts start",
