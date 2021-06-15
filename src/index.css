@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.pending {
+  opacity: 0.7;
+  transition: opacity 0.2s 0.4s linear;
+}
+.done {
+  opacity: 1;
+  transition: opacity 0 0 linear;
+}
