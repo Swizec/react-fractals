@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import lagRadar from "@gaearon/lag-radar";
 import logo from "./logo.svg";
+import lagRadar from "@gaearon/lag-radar";
 import "./App.css";
 
 import Pythagoras from "./Pythagoras";
@@ -145,6 +145,7 @@ function useRadar(id) {
             lagRadar({
                 size: 100,
                 parent: node,
+                frames: 20
             });
         }
     }
