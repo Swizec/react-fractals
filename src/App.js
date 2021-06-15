@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { select as d3select, mouse as d3mouse } from "d3-selection";
-import { scaleLinear } from "d3-scale";
 
 import Pythagoras from "./Pythagoras";
 
@@ -12,9 +10,9 @@ class App extends Component {
         height: 600,
     };
     state = {
-        treeSize: 0,
+        treeSize: 4,
         baseW: 80,
-        heightFactor: 0.55,
+        heightFactor: 0.4,
         lean: 0,
     };
     running = false;
@@ -22,76 +20,53 @@ class App extends Component {
 
     changeTreeSize(event) {
         this.setState({
-            treeSize: event.target.value,
+            treeSize: Number(event.target.value),
         });
     }
 
     changeTreeLean(event) {
-        console.log(event.target.value);
         this.setState({
-            lean: event.target.value,
+            lean: -Number(event.target.value),
         });
     }
-
-    // next() {
-    //     const { currentMax } = this.state;
-
-    //     if (currentMax < this.maxTreeSize) {
-    //         this.setState({ currentMax: currentMax + 1 });
-    //         setTimeout(this.next.bind(this), 500);
-    //     }
-    // }
-
-    // Throttling approach borrowed from Vue fork
-    // https://github.com/yyx990803/vue-fractal/blob/master/src/App.vue
-    // rAF makes it slower than just throttling on React update
-    // onMouseMove(event) {
-    //     if (this.running) return;
-    //     this.running = true;
-
-    //     const [x, y] = d3mouse(this.refs.svg),
-    //         scaleFactor = scaleLinear()
-    //             .domain([this.svg.height, 0])
-    //             .range([0, 0.8]),
-    //         scaleLean = scaleLinear()
-    //             .domain([0, this.svg.width / 2, this.svg.width])
-    //             .range([0.5, 0, -0.5]);
-
-    //     this.setState({
-    //         heightFactor: scaleFactor(y),
-    //         lean: scaleLean(x),
-    //     });
-    //     this.running = false;
-    // }
 
     render() {
         return (
             <div className="App">
-                <div className="App-header">
+                <div className="App-header" style={{ marginBottom: "1rem" }}>
                     <img src={logo} className="App-logo" alt="logo" />
                     <h2>This is a dancing Pythagoras tree</h2>
                 </div>
+                <label>Lean the tree:</label>
+                <br />
                 <input
                     type="range"
                     value={this.state.lean}
                     onChange={(event) => this.changeTreeLean(event)}
                     min="-0.5"
                     max="0.5"
-                    step="0.01"
+                    step="0.05"
+                    style={{ width: this.svg.width / 3 }}
                 />
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                    <input
-                        type="range"
-                        value={this.state.treeSize}
-                        onChange={(event) => this.changeTreeSize(event)}
-                        min="0"
-                        max={this.maxTreeSize}
-                        step="1"
-                        style={{
-                            transform: "rotate(-90deg)",
-                            width: this.svg.height / 2,
-                        }}
-                    />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <label>Grow the tree</label>
+                        <input
+                            type="range"
+                            value={this.state.treeSize}
+                            onChange={(event) => this.changeTreeSize(event)}
+                            min="0"
+                            max={this.maxTreeSize}
+                            step="1"
+                            style={{
+                                transform: `rotate(-90deg) translate(-${
+                                    this.svg.height / 2
+                                }px, 0)`,
+                                width: this.svg.height / 2,
+                            }}
+                        />
+                    </div>
+
                     <svg
                         width={this.svg.width}
                         height={this.svg.height}
