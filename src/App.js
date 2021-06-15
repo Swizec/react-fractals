@@ -19,14 +19,18 @@ class App extends Component {
     maxTreeSize = 11;
 
     changeTreeSize(event) {
-        this.setState({
-            treeSize: Number(event.target.value),
+        React.startTransition(() => {
+            this.setState({
+                treeSize: Number(event.target.value),
+            });
         });
     }
 
     changeTreeLean(event) {
-        this.setState({
-            lean: -Number(event.target.value),
+        React.startTransition(() => {
+            this.setState({
+                lean: Number(event.target.value),
+            });
         });
     }
 
@@ -77,7 +81,7 @@ class App extends Component {
                             w={this.state.baseW}
                             h={this.state.baseW}
                             heightFactor={this.state.heightFactor}
-                            lean={this.state.lean}
+                            lean={-this.state.lean}
                             x={this.svg.width / 2 - 40}
                             y={this.svg.height - this.state.baseW}
                             lvl={0}
