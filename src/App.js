@@ -11,7 +11,7 @@ function App() {
     };
     const baseWidth = 80;
     const heightFactor = 0.4;
-    const maxTreeSize = 15;
+    const maxTreeSize = 20;
 
     const [treeSize, setTreeSize] = useState(8);
     const [treeLean, setTreeLean] = useState(0);
