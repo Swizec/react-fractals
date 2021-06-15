@@ -13,29 +13,41 @@ function App() {
     const heightFactor = 0.4;
     const maxTreeSize = 20;
 
+    // we split state in two so we can update
+    // visuals and inputs separately
+    const [treeSizeInput, setTreeSizeInput] = useState(8);
     const [treeSize, setTreeSize] = useState(8);
+
+    const [treeLeanInput, setTreeLeanInput] = useState(0);
     const [treeLean, setTreeLean] = useState(0);
+
     const [enableStartTransition, setEnableStartTransition] = useState(false);
 
-    // grow/shrink the tree, possibly using startTransition
     function changeTreeSize(event) {
+        const value = Number(event.target.value);
+        setTreeSizeInput(value); // update input
+
+        // update visuals
         if (enableStartTransition) {
             React.startTransition(() => {
-                setTreeSize(Number(event.target.value));
+                setTreeSize(value);
             });
         } else {
-            setTreeSize(Number(event.target.value));
+            setTreeSize(value);
         }
     }
 
-    // lean the tree, possibly using startTransition
     function changeTreeLean(event) {
+        const value = Number(event.target.value);
+        setTreeLeanInput(value); // update input
+
+        // update visuals
         if (enableStartTransition) {
             React.startTransition(() => {
-                setTreeLean(Number(event.target.value));
+                setTreeLean(value);
             });
         } else {
-            setTreeLean(Number(event.target.value));
+            setTreeLean(value);
         }
     }
 
@@ -71,7 +83,7 @@ function App() {
                     <br />
                     <input
                         type="range"
-                        value={treeLean}
+                        value={treeLeanInput}
                         onChange={changeTreeLean}
                         min="-0.5"
                         max="0.5"
@@ -90,7 +102,7 @@ function App() {
                     </label>
                     <input
                         type="range"
-                        value={treeSize}
+                        value={treeSizeInput}
                         onChange={changeTreeSize}
                         min="0"
                         max={maxTreeSize}
