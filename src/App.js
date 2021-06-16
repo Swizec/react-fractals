@@ -1,5 +1,6 @@
 import React, { useState, useTransition } from "react";
 import logo from "./logo.svg";
+import LagRadar from "react-lag-radar";
 import "./App.css";
 
 import Pythagoras from "./Pythagoras";
@@ -64,7 +65,7 @@ function App() {
     return (
         <div className="App">
             <div className="App-header" style={{ marginBottom: "1rem" }}>
-                <img src={logo} className="App-logo" alt="logo" />
+                <LagRadar />
                 <h2>This is a leaning Pythagoras tree</h2>
             </div>
 

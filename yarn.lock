@@ -1234,6 +1234,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@gaearon/lag-radar@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@gaearon/lag-radar/-/lag-radar-0.1.0.tgz#b8de6daeb0318fd35b6ad74d5c891453153fd401"
+  integrity sha512-gRBjSuEG6HuyoXhy+yedPXlcGKyUNMlNpgKTncgfXwIi6ejt/0KuqOzck/geYqy8z02fuJrz1VjkF4EwH2Oq8g==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -9017,6 +9022,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-lag-radar@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-lag-radar/-/react-lag-radar-1.0.0.tgz#424b61d5e26016e85efa2c9fea01ae0157eb34fd"
+  integrity sha512-3Pv3B3PuMgFgnakXBrVGYPt0eOHQX+zwcImXSKI9CcF2RDw7VUImr5yb+F1hNl35niL7HSF1wAsMko6I4bO7LQ==
+  dependencies:
+    "@gaearon/lag-radar" "^0.1.0"
 
 react-refresh@^0.8.3:
   version "0.8.3"
