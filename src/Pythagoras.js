@@ -44,9 +44,17 @@ const Pythagoras = React.memo(({
     right,
     lvl,
     maxlvl,
+    enableSlowdown,
 }) => {
     if (lvl >= maxlvl || w < 1) {
         return null;
+    }
+
+    if (enableSlowdown) {
+        let now = performance.now();
+        while (performance.now() - now < 0.1) {
+            // do nothing
+        }
     }
 
     const { nextRight, nextLeft, A, B } = memoizedCalc({
@@ -74,6 +82,7 @@ const Pythagoras = React.memo(({
             />
 
             <Pythagoras
+                enableSlowdown={enableSlowdown}
                 w={nextLeft}
                 x={0}
                 y={-nextLeft}
@@ -85,6 +94,7 @@ const Pythagoras = React.memo(({
             />
 
             <Pythagoras
+                enableSlowdown={enableSlowdown}
                 w={nextRight}
                 x={w - nextRight}
                 y={-nextRight}
