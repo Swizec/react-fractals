@@ -34,7 +34,7 @@ const memoizedCalc = (function () {
     };
 })();
 
-const Pythagoras = React.memo(({
+const Pythagoras = ({
     w,
     x,
     y,
@@ -106,6 +106,6 @@ const Pythagoras = React.memo(({
             />
         </g>
     );
-});
+};
 
 export default Pythagoras;
