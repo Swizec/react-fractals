@@ -6,8 +6,6 @@ Math.deg = function (radians) {
 };
 
 const treeCalc = function ({ w, heightFactor, lean }) {
-    const { w, heightFactor, lean } = args;
-
     const trigH = heightFactor * w;
 
     const result = {
@@ -17,7 +15,6 @@ const treeCalc = function ({ w, heightFactor, lean }) {
         B: Math.deg(Math.atan(trigH / ((0.5 - lean) * w))),
     };
 
-    memo[memoKey] = result;
     return result;
 };
 
