@@ -51,8 +51,8 @@ function App() {
         }
     }
 
-    function toggleStartTransition() {
-        setEnableStartTransition(!enableStartTransition);
+    function toggleStartTransition(event) {
+        setEnableStartTransition(event.target.checked);
     }
 
     return (
@@ -74,7 +74,7 @@ function App() {
                     <br />
                     <input
                         type="checkbox"
-                        selected={enableStartTransition}
+                        checked={enableStartTransition}
                         onChange={toggleStartTransition}
                     />
                 </div>
