@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -20,6 +20,7 @@ function App() {
 
     const [treeLeanInput, setTreeLeanInput] = useState(0);
     const [treeLean, setTreeLean] = useState(0);
+    const [isLeaning, startLeaning] = useTransition()
 
     const [enableStartTransition, setEnableStartTransition] = useState(false);
     const [enableSlowdown, setEnableSlowdown] = useState(false);
@@ -44,7 +45,7 @@ function App() {
 
         // update visuals
         if (enableStartTransition) {
-            React.startTransition(() => {
+            startLeaning(() => {
                 setTreeLean(value);
             });
         } else {
@@ -133,7 +134,10 @@ function App() {
                 <svg
                     width={svg.width}
                     height={svg.height}
-                    style={{ border: "1px solid lightgray" }}
+                    className={isLeaning ? 'pending' : 'done'}
+                    style={{
+                        border: "1px solid lightgray",
+                    }}
                 >
                     <Pythagoras
                         enableSlowdown={enableSlowdown}
