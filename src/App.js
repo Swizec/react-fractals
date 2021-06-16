@@ -22,6 +22,7 @@ function App() {
     const [treeLean, setTreeLean] = useState(0);
 
     const [enableStartTransition, setEnableStartTransition] = useState(false);
+    const [enableSlowdown, setEnableSlowdown] = useState(false);
 
     function changeTreeSize(event) {
         const value = Number(event.target.value);
@@ -53,6 +54,10 @@ function App() {
 
     function toggleStartTransition(event) {
         setEnableStartTransition(event.target.checked);
+    }
+
+    function toggleSlowdown(event) {
+        setEnableSlowdown(event.target.checked);
     }
 
     return (
@@ -91,6 +96,15 @@ function App() {
                         style={{ width: svg.width / 3 }}
                     />
                 </div>
+                <div>
+                    <label>Make each square block the thread for 0.1ms</label>
+                    <br />
+                    <input
+                        type="checkbox"
+                        checked={enableSlowdown}
+                        onChange={toggleSlowdown}
+                    />
+                </div>
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -122,6 +136,7 @@ function App() {
                     style={{ border: "1px solid lightgray" }}
                 >
                     <Pythagoras
+                        enableSlowdown={enableSlowdown}
                         w={baseWidth}
                         h={baseWidth}
                         heightFactor={heightFactor}
