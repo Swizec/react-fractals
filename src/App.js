@@ -21,7 +21,7 @@ function App() {
 
     const [treeLeanInput, setTreeLeanInput] = useState(0);
     const [treeLean, setTreeLean] = useState(0);
-    const [isLeaning, startLeaning] = useTransition()
+    const [isLeaning, startLeaning] = useTransition();
 
     const [enableStartTransition, setEnableStartTransition] = useState(false);
     const [enableSlowdown, setEnableSlowdown] = useState(false);
@@ -68,7 +68,6 @@ function App() {
                 <LagRadar />
                 <h2>This is a leaning Pythagoras tree</h2>
             </div>
-
             <div
                 style={{
                     display: "flex",
@@ -76,14 +75,16 @@ function App() {
                     justifyContent: "center",
                 }}
             >
-                <div>
-                    <label>Use startTransition</label>
-                    <br />
-                    <input
-                        type="checkbox"
-                        checked={enableStartTransition}
-                        onChange={toggleStartTransition}
-                    />
+                <div style={{ fontWeight: "bold", fontSize: "1.2em" }}>
+                    <label>
+                        Use startTransition
+                        <br />
+                        <input
+                            type="checkbox"
+                            checked={enableStartTransition}
+                            onChange={toggleStartTransition}
+                        />
+                    </label>
                 </div>
                 <div>
                     <label>Lean the tree:</label>
@@ -99,18 +100,19 @@ function App() {
                     />
                 </div>
                 <div>
-                    <label>Make each square block the thread for 0.1ms</label>
-                    <br />
-                    <input
-                        type="checkbox"
-                        checked={enableSlowdown}
-                        onChange={toggleSlowdown}
-                    />
+                    <label>
+                        Make each square block the thread for 0.1ms
+                        <br />
+                        <input
+                            type="checkbox"
+                            checked={enableSlowdown}
+                            onChange={toggleSlowdown}
+                        />
+                    </label>
                 </div>
             </div>
-
             <div style={{ display: "flex", flexDirection: "row" }}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ width: 130 }}>
                     <label>
                         Grow the tree
                         <br />
@@ -126,7 +128,7 @@ function App() {
                         style={{
                             transform: `rotate(-90deg) translate(-${
                                 svg.height / 2
-                            }px, 0)`,
+                            }px, -90px)`,
                             width: svg.height / 2,
                         }}
                     />
@@ -135,7 +137,7 @@ function App() {
                 <svg
                     width={svg.width}
                     height={svg.height}
-                    className={isLeaning ? 'pending' : 'done'}
+                    className={isLeaning ? "pending" : "done"}
                     style={{
                         border: "1px solid lightgray",
                     }}
@@ -152,6 +154,37 @@ function App() {
                         maxlvl={treeSize}
                     />
                 </svg>
+            </div>
+            <div className="explanation">
+                <h1>What this demo shows</h1>
+
+                <p>
+                    The demo shows you what happens when every state change
+                    updates 1,000,000+ nodes. Slider on the left grows the tree,
+                    makes the problem worse – exponentially. Slider on top leans
+                    the tree, updates every node. Use it to see what happens :)
+                </p>
+                <p>
+                    Toggle the `Use startTransition` checkbox to compare
+                    behavior with and without the new feature. You should see
+                    your inputs laaaaaag without `startTransition`. When it's
+                    enabled, the urgent input update happens fast and the slow
+                    fractal updates later.
+                </p>
+                <p>
+                    If you don't see slowness, enable the artificial 0.1ms
+                    delay. That'll do it.
+                </p>
+                <p>
+                    <a href="https://swizec.com/blog/a-better-react-18-starttransition-demo/">
+                        Read deeper explanation and startTransition gotchas on
+                        Swizec's blog 👉
+                    </a>
+                </p>
+                <p></p>
+                <p>
+                    Built by <a href="https://twitter.com/swizec">@swizec</a>
+                </p>
             </div>
         </div>
     );

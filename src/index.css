@@ -1,14 +1,19 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .pending {
-  opacity: 0.7;
-  transition: opacity 0.2s 0.4s linear;
+    opacity: 0.7;
+    transition: opacity 0.2s 0.4s linear;
 }
 .done {
-  opacity: 1;
-  transition: opacity 0 0 linear;
+    opacity: 1;
+    transition: opacity 0 0 linear;
+}
+
+.explanation {
+    margin: 0 auto;
+    max-width: 800px;
 }
