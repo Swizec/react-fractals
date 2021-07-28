@@ -12,7 +12,7 @@ function App() {
     };
     const baseWidth = 80;
     const heightFactor = 0.4;
-    const maxTreeSize = 20;
+    const maxTreeSize = 22;
 
     // we split state in two so we can update
     // visuals and inputs separately
@@ -66,7 +66,13 @@ function App() {
         <div className="App">
             <div className="App-header" style={{ marginBottom: "1rem" }}>
                 <LagRadar />
-                <h2>This is a leaning Pythagoras tree</h2>
+                <h2 style={{ marginTop: "-0.2rem" }}>
+                    This is a leaning Pythagoras tree
+                    <br />
+                    <small>
+                        {Number(2 ** treeSize - 1).toLocaleString()} squares
+                    </small>
+                </h2>
             </div>
             <div
                 style={{
